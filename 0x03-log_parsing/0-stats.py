@@ -35,9 +35,9 @@ def print_statistics(codes):
         codes[code] = 0
 
 for line in sys.stdin:
-    """match = re.findall(pattern, line)
+    match = re.findall(pattern, line)
     if match == []:
-        continue"""
+        continue
     try:
         line = line.split()
         total_size += int(line[-1])
