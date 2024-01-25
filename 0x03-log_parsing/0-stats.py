@@ -34,7 +34,6 @@ def print_statistics(codes):
         print(f"{code}: {codes[code]}")
         codes[code] = 0
 
-
 for line in sys.stdin:
     match = re.findall(pattern, line)
     if match == []:
