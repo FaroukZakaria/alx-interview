@@ -8,9 +8,8 @@ import re
 
 i = 0  # counts the number of lines read
 total_size = 0
-pattern = r'''
-\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3} -
- \[([^]]+)\] \"GET /projects/260 HTTP/1.1\" \d+ \d+
+pattern = r'''(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) -
+ \[([^\]]+)\] \"GET \/projects\/260 HTTP\/1\.1\" (\d+) (\d+)
 '''.replace('\n', '')
 codes = {
     200: 0,
@@ -40,10 +39,19 @@ for line in sys.stdin:
     match = re.findall(pattern, line)
     if match == []:
         continue
-    i += 1
-    line = line.split()
-    total_size += line[-1]
-    status = line[-2]
-    if KeyboardInterrupt or i == 10:
+    try:
+        line = line.split()
+        total_size += int(line[-1])
+        status = int(line[-2])
+        if status in codes:
+            codes[status] += 1
+        else:
+            continue
+        i += 1
+        if i == 10:
+            print_statistics(codes)
+            i = 0
+    except KeyboardInterrupt:
         print_statistics(codes)
         i = 0
+        continue
