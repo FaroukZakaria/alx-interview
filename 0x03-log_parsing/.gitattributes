@@ -1,2 +1,2 @@
-0-generator.py    eol=lf   chmod=+x
-0-stats.py    eol=lf   chmod=+x
+0-generator.py    eol=crlf   chmod=u+x
+0-stats.py    eol=crlf   chmod=u+x
