@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-N queens puzzle. Place N numbers of queens in 
+N queens puzzle. Place N numbers of queens in NxN board
+without them threatening each other.
 """
 
 import sys
