@@ -75,11 +75,7 @@ solutions = []
 i = 0
 j = 0
 while i < N:
-    #print(f"current: \n{current}\n")
-    #print(f"occupied: \n{occupied}\n")
-    #print(f"solution: \n{solutions}\n")
     while j < N:
-        #print(f"current: \n{current}\n")
         if ([i, j] in occupied):
             if j == N - 1:  # Check if y-position is at top
                 i -= 1
@@ -109,13 +105,9 @@ while i < N:
             current.append([i, j])  # mark the point
             if i == N - 1:  # Checks if all queens are placed
                 solutions.append(current[:])  # Add the solution
-                print(f"solution{len(solutions)} is: ")
-                print(solutions)
-                j = current[-1][-1]
+                j = current[-1][-1]  # Removing last point
                 current.pop()
-                print(f"solution{len(solutions)} before if is: ")
-                print(solutions)
-                if j == N - 1:
+                if j == N - 1:  # Checking if last point is at top
                     i -= 1
                     occupied = occupied[:-(len(clear(
                             i,
@@ -123,10 +115,8 @@ while i < N:
                     j = current[-1][-1]
                     current.pop()
                     j += 1
-                    print(f"solution{len(solutions)} after if is: ")
-                    print(solutions)
                     continue
-                else:
+                else:  # Checking if more possibilities exist (not at top)
                     j += 1
                     continue
             for elm in clear(i, j, N):  # mark all the occupied squares
