@@ -40,7 +40,7 @@ def clear(x, y, N):
 
     X = x
     Y = y
-    while ((X >= 0) and (Y <= N)):  # Up-left diagonal
+    while ((X >= 0) and (Y < N)):  # Up-left diagonal
         positions.add((X, Y))
         X -= 1
         Y += 1
@@ -54,14 +54,14 @@ def clear(x, y, N):
 
     X = x
     Y = y
-    while ((X <= N) and (Y <= N)):  # Top-right diagonal
+    while ((X < N) and (Y < N)):  # Top-right diagonal
         positions.add((X, Y))
         X += 1
         Y += 1
 
     X = x
     Y = y
-    while ((X <= N) and (Y >= 0)):  # Bottom-right diagonal
+    while ((X < N) and (Y >= 0)):  # Bottom-right diagonal
         positions.add((X, Y))
         X += 1
         Y -= 1
@@ -75,7 +75,11 @@ solutions = []
 i = 0
 j = 0
 while i < N:
+    #print(f"current: \n{current}\n")
+    #print(f"occupied: \n{occupied}\n")
+    #print(f"solution: \n{solutions}\n")
     while j < N:
+        #print(f"current: \n{current}\n")
         if ([i, j] in occupied):
             if j == N - 1:  # Check if y-position is at top
                 i -= 1
@@ -104,12 +108,27 @@ while i < N:
         else:  # Not occupied
             current.append([i, j])  # mark the point
             if i == N - 1:  # Checks if all queens are placed
-                solutions.append(current)  # Add the solution
-                j = current[0][-1] + 1  # start a new game
-                i = 0
-                current = []
-                occupied = []
-                continue
+                solutions.append(current[:])  # Add the solution
+                print(f"solution{len(solutions)} is: ")
+                print(solutions)
+                j = current[-1][-1]
+                current.pop()
+                print(f"solution{len(solutions)} before if is: ")
+                print(solutions)
+                if j == N - 1:
+                    i -= 1
+                    occupied = occupied[:-(len(clear(
+                            i,
+                            current[-1][-1], N)))]
+                    j = current[-1][-1]
+                    current.pop()
+                    j += 1
+                    print(f"solution{len(solutions)} after if is: ")
+                    print(solutions)
+                    continue
+                else:
+                    j += 1
+                    continue
             for elm in clear(i, j, N):  # mark all the occupied squares
                 occupied.append(elm)
             i += 1
