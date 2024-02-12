@@ -19,7 +19,8 @@ except ValueError:
     print("N must be a number")
     sys.exit(1)
 
-def clear(x,y,N):
+
+def clear(x, y, N):
     """
     Clears the boards that are occupied by queen
     on a position given by (x,y) in NxN board
@@ -29,8 +30,8 @@ def clear(x,y,N):
 
     positions = set()
     for i in range(N):
-        positions.add((i,y))  # Horizontal occupied
-        positions.add((x,i))  # Vertical occupied
+        positions.add((i, y))  # Horizontal occupied
+        positions.add((x, i))  # Vertical occupied
 
     X = x
     Y = y
@@ -38,7 +39,7 @@ def clear(x,y,N):
         positions.add((X, Y))
         X -= 1
         Y += 1
-    
+
     X = x
     Y = y
     while ((X >= 0) and (Y >= 0)):  # Bottom-left diagonal
@@ -52,7 +53,7 @@ def clear(x,y,N):
         positions.add((X, Y))
         X += 1
         Y += 1
-    
+
     X = x
     Y = y
     while ((X <= 3) and (Y >= 0)):  # Bottom-right diagonal
