@@ -21,6 +21,8 @@ except ValueError:
 
 N = int(sys.argv[1])
 the_end = 0
+
+
 def clear(x, y, N):
     """
     Clears the boards that are occupied by queen
@@ -76,7 +78,7 @@ i = 0
 j = 0
 while i < N:
     while j < N:
-        #print("blay")
+        # print("blay")
         if ([i, j] in occupied):
             if j == N - 1:
                 i -= 1
@@ -89,7 +91,9 @@ while i < N:
                         break
                     else:
                         i -= 1
-                        occupied = occupied[:-(len(clear(i, current[-1][-1], N)))]
+                        occupied = occupied[:-(len(clear(
+                            i,
+                            current[-1][-1], N)))]
                         j = current[-1][-1]
                         current.pop()
                         j += 1
@@ -101,7 +105,7 @@ while i < N:
                 j += 1
                 continue
         else:
-            #print("Let's go")
+            # print("Let's go")
             current.append([i, j])
             if i == N - 1:
                 solutions.append(current)
@@ -115,7 +119,7 @@ while i < N:
             i += 1
             j = 0
             break
-    #print("blax")
+    # print("blax")
     if the_end == 1:
         break
 
