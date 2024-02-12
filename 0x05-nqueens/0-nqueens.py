@@ -69,10 +69,6 @@ def clear(x, y, N):
     return [list(t) for t in positions]
 
 
-def remove_matching_lists(main_list, remove_list):
-    return [lst for lst in main_list if lst not in remove_list]
-
-
 occupied = []
 current = []
 solutions = []
