@@ -34,11 +34,13 @@ def clear(x, y, N):
     positions = set()
     for i in range(N):
         positions.add((i, y))  # Horizontal occupied
+
+    for i in range(N):
         positions.add((x, i))  # Vertical occupied
 
     X = x
     Y = y
-    while ((X >= 0) and (Y <= 3)):  # Up-left diagonal
+    while ((X >= 0) and (Y <= N)):  # Up-left diagonal
         positions.add((X, Y))
         X -= 1
         Y += 1
@@ -52,14 +54,14 @@ def clear(x, y, N):
 
     X = x
     Y = y
-    while ((X <= 3) and (Y <= 3)):  # Top-right diagonal
+    while ((X <= N) and (Y <= N)):  # Top-right diagonal
         positions.add((X, Y))
         X += 1
         Y += 1
 
     X = x
     Y = y
-    while ((X <= 3) and (Y >= 0)):  # Bottom-right diagonal
+    while ((X <= N) and (Y >= 0)):  # Bottom-right diagonal
         positions.add((X, Y))
         X += 1
         Y -= 1
@@ -78,18 +80,26 @@ i = 0
 j = 0
 while i < N:
     while j < N:
-        # print("blay")
+        print("current is now:")
+        print(current)
         if ([i, j] in occupied):
-            if j == N - 1:
+            print("occupied")
+            if j == N - 1:  # Check if y-position is at top
+                print("It's on top as well")
                 i -= 1
                 occupied = occupied[:-(len(clear(i, current[-1][-1], N)))]
                 j = current[-1][-1]
                 current.pop()
-                if j == N - 1:
-                    if i == 0:
+                print("after going back and undoing, current is now:")
+                print(current)
+                if j == N - 1:  # Check if y-position at top after change
+                    print("the one at back is already at top...")
+                    if i == 0:  # Check if x-position at start (all done)
+                        print("and it's at first field as well.. game over")
                         the_end = 1
                         break
-                    else:
+                    else:  # There are more possibilities
+                        print("and there are more possibilities")
                         i -= 1
                         occupied = occupied[:-(len(clear(
                             i,
@@ -97,31 +107,44 @@ while i < N:
                         j = current[-1][-1]
                         current.pop()
                         j += 1
+                        print("after going back and undoing, current is now:")
+                        print(current)
                         continue
-                else:
+                else:  # if y not at top
+                    print("moving up")
                     j += 1
                     continue
-            else:
+            else:  # if y not at top
+                print("moving up")
                 j += 1
                 continue
-        else:
-            # print("Let's go")
-            current.append([i, j])
-            if i == N - 1:
-                solutions.append(current)
-                j = current[0][-1] + 1
+        else:  # Not occupied
+            print(f"Not occupied. Marking... {[i,j]}")
+            current.append([i, j])  # mark the point
+            if i == N - 1:  # Checks if all queens are placed
+                print("all queens are placed. Submitting solution:")
+                print(current)
+                solutions.append(current)  # Add the solution
+                j = current[0][-1] + 1  # start a new game
                 i = 0
                 current = []
                 occupied = []
+                print("starting a new game")
                 continue
-            for elm in clear(i, j, N):
+            for elm in clear(i, j, N):  # mark all the occupied squares
                 occupied.append(elm)
             i += 1
             j = 0
+            print("Done marking occupied squares...")
+            print(occupied[:-(len(clear(i, current[-1][-1], N)))])
+            print("total occupied:")
+            print(occupied)
+            print("moving to next field")
             break
     # print("blax")
     if the_end == 1:
         break
+    print("another round starts")
 
 for i in solutions:
     print(i)
