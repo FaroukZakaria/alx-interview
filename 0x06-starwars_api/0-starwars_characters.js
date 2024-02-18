@@ -24,4 +24,3 @@ request(movieUrl, { json: true }, (error, response, body) => {
     });
   });
 });
-
