@@ -31,6 +31,7 @@ def transpose(matrix):
 
     return new_matrix
 
+
 def rotate_2d_matrix(matrix):
     """
     rotates the 2D matrix by reversing rows and transposing
