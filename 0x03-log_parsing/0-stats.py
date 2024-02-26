@@ -38,10 +38,8 @@ try:
         try:
             match = re.findall(pattern, line)
             if match == []:
-                print("not the format")
                 continue
 
-            print("passed")
             line = line.split()
             total_size += int(line[-1])
             status = int(line[-2])
