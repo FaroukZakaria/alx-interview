@@ -34,11 +34,12 @@ def print_statistics(codes):
         print(f"{code}: {codes[code]}")
         codes[code] = 0
 
-for line in sys.stdin:
-    match = re.findall(pattern, line)
-    if match == []:
-        continue
-    try:
+try:
+    for line in sys.stdin:
+        match = re.findall(pattern, line)
+        if match == []:
+            continue
+
         line = line.split()
         total_size += int(line[-1])
         status = int(line[-2])
@@ -50,6 +51,7 @@ for line in sys.stdin:
         if i == 10:
             print_statistics(codes)
             i = 0
-    except KeyboardInterrupt:
-        print_statistics(codes)
-        i = 0
+
+except KeyboardInterrupt:
+    print_statistics(codes)
+    i = 0
