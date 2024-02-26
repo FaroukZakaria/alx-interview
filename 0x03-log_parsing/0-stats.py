@@ -53,4 +53,3 @@ for line in sys.stdin:
     except KeyboardInterrupt:
         print_statistics(codes)
         i = 0
-        continue
