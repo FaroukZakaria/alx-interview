@@ -32,7 +32,6 @@ def print_statistics(codes):
         if codes[code] == 0:
             continue
         print(f"{code}: {codes[code]}")
-        codes[code] = 0
 
 try:
     for line in sys.stdin:
@@ -51,6 +50,8 @@ try:
         if i == 10:
             print_statistics(codes)
             i = 0
+
+    print_statistics(codes)
 
 except KeyboardInterrupt:
     print_statistics(codes)
