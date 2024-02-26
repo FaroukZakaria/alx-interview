@@ -28,18 +28,11 @@ def makeChange(coins, total):
 
     sorted_coins = sorted(coins)
     total_coins = total
-    print(f"Calculating for coins: {sorted_coins}")
     number_of_coins = 0
     for i in range(-1, len(sorted_coins) * -1 - 1, -1):
-        print(f"calculating {total_coins} / {sorted_coins[i]}")
         number_of_coins += (total_coins // sorted_coins[i])
-        print(f"subtracting "
-                f"{(total_coins // sorted_coins[i]) * sorted_coins[i]} "
-                f"from total coins")
         total_coins -= (total_coins // sorted_coins[i]) * sorted_coins[i]
-        print(f"and total coins now are {total_coins}")
-        print(f"number of coins is now: {number_of_coins}")
-        
+
         if total_coins == 0:
             return number_of_coins
 
