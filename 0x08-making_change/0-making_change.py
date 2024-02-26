@@ -17,23 +17,16 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
-    """impossible = 1
-    for i in coins:
-        if total % i == 0:
-            impossible = 0
-            break
-
-    if impossible:
-        return -1"""
-
-    sorted_coins = sorted(coins)
-    total_coins = total
-    number_of_coins = 0
-    for i in range(-1, len(sorted_coins) * -1 - 1, -1):
+    sorted_coins = sorted(coins)  # Sorting to start counting
+    total_coins = total  # another variable pointing to total for modification
+    number_of_coins = 0  # The number that will be returned
+    for i in range(-1, len(sorted_coins) * -1 - 1, -1):  # from high to low
+        # adding all possible whole numbers of the current coin
         number_of_coins += (total_coins // sorted_coins[i])
+        # Subtracting what I gathered from the recent operation
         total_coins -= (total_coins // sorted_coins[i]) * sorted_coins[i]
 
-        if total_coins == 0:
+        if total_coins == 0:  # I succeeded in collecting them if they're zero
             return number_of_coins
 
-    return -1
+    return -1  # If total_coins still 0, then it's impossible to get required
