@@ -8,8 +8,8 @@ import re
 
 i = 0  # counts the number of lines read
 total_size = 0
-pattern = r'''(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) -
- \[([^\]]+)\] \"GET \/projects\/260 HTTP\/1\.1\" (\d+) (\d+)
+pattern = r'''(\b\w+\b|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*-
+\s*\[([^\]]+)\] \"GET \/projects\/260 HTTP\/1\.1\" \b\w+\b|(\d+) (\d+)
 '''.replace('\n', '')
 codes = {
     200: 0,
@@ -35,21 +35,26 @@ def print_statistics(codes):
 
 try:
     for line in sys.stdin:
-        match = re.findall(pattern, line)
-        if match == []:
-            continue
+        try:
+            match = re.findall(pattern, line)
+            if match == []:
+                print("not the format")
+                continue
 
-        line = line.split()
-        total_size += int(line[-1])
-        status = int(line[-2])
-        if status in codes:
-            codes[status] += 1
-        else:
+            print("passed")
+            line = line.split()
+            total_size += int(line[-1])
+            status = int(line[-2])
+            if status in codes:
+                codes[status] += 1
+            else:
+                continue
+            i += 1
+            if i == 10:
+                print_statistics(codes)
+                i = 0
+        except:
             continue
-        i += 1
-        if i == 10:
-            print_statistics(codes)
-            i = 0
 
     print_statistics(codes)
 
