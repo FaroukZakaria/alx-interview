@@ -6,7 +6,6 @@ in water represented by 0's. There's only one island (or nothing).
 Each "1" is a square with edge length of 1 unit.
 """
 
-
 def island_perimeter(grid):
     """
     Calculates the perimeter of an island using a grid with 100 area units max
@@ -21,6 +20,7 @@ def island_perimeter(grid):
 
     perimeter = 0
     for row in range(height):
+        print(f"checking for row: {row}")
         for elm in range(width):
             if grid[row][elm] == 0:
                 continue
@@ -29,23 +29,40 @@ def island_perimeter(grid):
             # Check up
             if row != 0:
                 if grid[row - 1][elm] == 0:  # There's water above
+                    print("there's water above")
                     edge += 1
+            else:
+                print("there's water above (beyond borders)")
+                edge += 1
 
             # Check left
             if elm != 0:
                 if grid[row][elm - 1] == 0:  # There's water left
+                    print("there's water left")
                     edge += 1
+            else:
+                print("there's water left (beyond borders)")
+                edge += 1
 
             # Check right
             if elm != width - 1:
                 if grid[row][elm + 1] == 0:  # There's water right
+                    print("there's water right")
                     edge += 1
+            else:
+                print("there's water right (beyond borders)")
+                edge += 1
 
             # Check down
             if row != height - 1:
                 if grid[row + 1][elm] == 0:  # There's water below
+                    print("there's water below")
                     edge += 1
+            else:
+                print("there's water below (beyond borders)")
+                edge += 1
 
+            print(f"adding {edge} to perimeter")
             perimeter += edge
 
     return perimeter
