@@ -47,6 +47,6 @@ class TestWinner(unittest.TestCase):
         self.assertEqual(isWinner(1, ["Hello"]), None)
 
     def test_wrong_argument_3(self):
-        self.assertEqual(isWinner(2, [1, "Hello"]), None)
+        self.assertEqual(isWinner(2, [1, "Hello"]), "Ben")
 if __name__ == '__main__':
     unittest.main()

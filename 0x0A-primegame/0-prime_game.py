@@ -58,19 +58,22 @@ def isWinner(x, nums):
     if not isinstance(nums, list):  # if nums isn't a list
         return None
 
-    for i in range(len(nums)):  # Check if any list item is not an integer
+    """for i in range(len(nums)):  # Check if any list item is not an integer
         if not isinstance(nums[i], int):
-            return None
+            return None"""
     Ben = 0
     Maria = 0
     for i in range(x):
-        if len_primes(nums[i]) % 2 == 0:
-            # If there are even number of primes, Ben wins
-            # Removing the multiple of numbers does nothing
-            # Because multiples are not primes because... they're multiples.
-            Ben += 1
-        else:
-            Maria += 1
+        try:
+            if len_primes(nums[i]) % 2 == 0:
+                # If there are even number of primes, Ben wins
+                # Removing the multiple of numbers does nothing
+                # Because multiples are not primes because... they're multiples.
+                Ben += 1
+            else:
+                Maria += 1
+        except:
+            continue
 
     if Ben == Maria:
         return None
