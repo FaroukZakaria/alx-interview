@@ -68,11 +68,11 @@ def isWinner(x, nums):
             if len_primes(nums[i]) % 2 == 0:
                 # If there are even number of primes, Ben wins
                 # Removing the multiple of numbers does nothing
-                # Because multiples are not primes because... they're multiples.
+                # Because multiples are not primes because, they're multiples.
                 Ben += 1
             else:
                 Maria += 1
-        except:
+        except Exception:
             continue
 
     if Ben == Maria:
