@@ -49,11 +49,11 @@ def isWinner(x, nums):
     """
     Returns the winner of the game (or None if tie)
     """
-    if x > len(nums):  # number of rounds is more than given n for each round
-        return None
+    """if x > len(nums):  # number of rounds is more than given n for each round
+        return None"""
 
     if nums == []:  # Empty list means no given n to play the game
-        return None
+        return "Ben"
 
     if not isinstance(nums, list):  # if nums isn't a list
         return None
